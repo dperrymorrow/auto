@@ -46,7 +46,7 @@ Very simple library, but yet it alleviates the need to ever load a model, librar
 	echo $this->auto->table->generate( $data );
 	?>
 	
-- [Log Issues or Suggestions](https://github.com/dperrymorrow/CodeIgniter-Tracer-Helper/issues)
+- [Log Issues or Suggestions](https://github.com/dperrymorrow/auto/issues)
 - [Follow me on Twitter](http://twitter.com/dperrymorrow)
 
 
