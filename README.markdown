@@ -8,7 +8,8 @@ Very simple library, but yet it alleviates the need to ever load a model, librar
 - will never load anything more than once. 
 - if the instance exists, its returned, if not it's loaded, instantiated as a CI var and returned. 
 
-## Example Usage: ( x.x indicates the version you have installed on your build )
+## Controller Usage
+( x.x indicates the version you have installed on your build )
     
     //// from some controller 
 	
@@ -21,7 +22,7 @@ Very simple library, but yet it alleviates the need to ever load a model, librar
 		// notice that I never loaded "your_model"?
 	}
 
-## From a model, spark, library, helper or anywhere! 
+## From anywhere 
 	
 	function some_method(){
 		// you have reference to CI instances from anywhere, 
@@ -30,10 +31,13 @@ Very simple library, but yet it alleviates the need to ever load a model, librar
 		// much less verbose to do something like using models within other models 
 	}
 	
-## Loading Helpers on demand, example from a view, but could be anywhere
+## Loading Helpers on demand
+example is from a view, but could be anywhere
 
-    // load helpers only when each method is used. 
-	<?php 
+    // load helpers only when each method is used
+ 	// the classname tells Auto which helper file to load, 
+    // in this case url_helper would be Url::desired_method()
+
 	echo Url::anchor( 'http://www.google.com', 'Go to google' ); 
 	echo '<hr/>';
 	echo Text::character_limiter( 'Lorem ipsum dolor sit amet, consectetur adipisicing', 10 );
@@ -44,8 +48,19 @@ Very simple library, but yet it alleviates the need to ever load a model, librar
 	echo Auto::inst()->table->generate( $data );
 	// or if in CI scope
 	echo $this->auto->table->generate( $data );
-	?>
 	
+## Loading sparks on demand
+the highest version folder in the spark folder will be loaded.
+
+    // if the spark is a library you can method chain such as
+    Auto::inst()->example_spark->some_lib_method();
+
+	// but, if its just helpers, you will have to call those as you normally would, 
+	// so you dont gain a whole lot in this case vs loading manually.
+	Auto::inst()->example_spark;
+	some_spark_helper_method();
+
+
 - [Log Issues or Suggestions](https://github.com/dperrymorrow/auto/issues)
 - [Follow me on Twitter](http://twitter.com/dperrymorrow)
 
