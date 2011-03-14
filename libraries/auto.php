@@ -14,6 +14,23 @@ class Auto{
 		self::$CI = &get_instance();
 		self::$instance = $this;
 		self::$CI->load->helper( 'file' );
+		
+		spl_autoload_register('Auto::load_helper_class'); // As of PHP 5.3.0
+	}
+	
+	
+	public static function load_helper_class( $class ){
+		
+		$helper_name = strtolower( $class );
+
+		if( 
+			file_exists( 'system/helpers/'.$helper_name.'_helper.php' ) or
+			file_exists( APPPATH.'helpers/'.$helper_name.'_helper.php' )
+		){
+
+			self::load_helper( $helper_name );
+			class_alias('Auto', $class );
+		}
 	}
 
 	public function __get( $varname ){
