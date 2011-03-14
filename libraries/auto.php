@@ -6,7 +6,6 @@ class Auto{
 
 	public static $CI;
 	public static $instance;
-	public static $helpers_loaded = array();
 
 	////////// INSTANCE METHODS //////////
 
@@ -21,7 +20,7 @@ class Auto{
 	
 	public static function load_helper_class( $class ){
 		
-		$helper_name = strtolower( $class );
+		$helper_name = underscore( humanize( $class ) );
 
 		if( 
 			file_exists( 'system/helpers/'.$helper_name.'_helper.php' ) or
@@ -70,20 +69,16 @@ class Auto{
 		}
 
 		public static function load_helper( $helper_name ){
-			
-			if( !in_array( $helper_name, self::$helpers_loaded )){
-				self::$CI->load->helper( $helper_name );
-				array_push( self::$helpers_loaded, $helper_name );
-			}
+			self::$CI->load->helper( $helper_name );
 		}
 		
-		public static function __callStatic( $method, $params ){
-
+		public static function __callStatic( $method, $params=null ){
+		
 			$len = count( $params );
 
 			switch ($len) {
 				case 0:
-				$method(); 
+				return $method(); 
 				break;
 				case 1:
 				return $method( $params[ 0 ] ); 
