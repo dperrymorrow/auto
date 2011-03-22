@@ -18,15 +18,18 @@ class Auto{
 	}
 	
 	
-	public static function load_helper_class( $class ){
-		
+	public static function load_helper_class( $class )
+	{
+
 		$helper_name = underscore( humanize( $class ) );
+		
+		if( strpos( $class, 'helper' ) === FALSE )
+		{
+			$helper_name = $helper_name . '_helper';
+		}
 
-		if( 
-			file_exists( 'system/helpers/'.$helper_name.'_helper.php' ) or
-			file_exists( APPPATH.'helpers/'.$helper_name.'_helper.php' )
-		){
-
+		if( file_exists( 'system/helpers/'.$helper_name.'.php' ) or file_exists( APPPATH.'helpers/'.$helper_name.'.php' ))
+		{
 			self::load_helper( $helper_name );
 			class_alias('Auto', $class );
 		}
