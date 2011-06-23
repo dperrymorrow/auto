@@ -12,7 +12,7 @@ class Auto{
 	public function __construct(){
 		self::$CI = &get_instance();
 		self::$instance = $this;
-		self::$CI->load->helper( array('file','infector') );
+		self::$CI->load->helper( array( 'file', 'inflector') );
 		
 		spl_autoload_register('Auto::load_helper_class'); // As of PHP 5.3.0
 	}
